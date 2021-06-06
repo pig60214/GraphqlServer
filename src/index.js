@@ -1,5 +1,6 @@
-import { ApolloServer, gql } from 'apollo-server-express'
+import { ApolloServer } from 'apollo-server-express'
 import express from 'express'
+import { typeDefs } from './schema/index.js'
 
 let data = [
   { title: 'FP in JavaScript', category: 'FP'},
@@ -7,22 +8,6 @@ let data = [
   { title: 'Speaking JavaScript', category: 'JS'}
 ]
 
-let typeDefs = gql`
-  type Query {
-    books(category: BookCategory!): [Book]
-  }
-
-  type Book {
-    title: String
-    category: BookCategory
-  }
-
-  enum BookCategory {
-    FP
-    FRP
-    JS
-  }
-`
 let books = (_, { category }) => data.filter(x => x.category === category)
 
 let resolvers = {
