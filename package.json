@@ -6,7 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon -e js,graphql,json src/index.js",
-    "prod": "cross-env NODE_ENV=production node src/index.js"
+    "prod": "cross-env NODE_ENV=production node src/index.js",
+    "lint": "eslint .",
+    "fix-lint": "eslint . --fix"
   },
   "repository": {
     "type": "git",
