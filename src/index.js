@@ -1,13 +1,13 @@
-import { ApolloServer, gql } from 'apollo-server-express'
-import express from 'express'
+import { ApolloServer, gql } from 'apollo-server-express';
+import express from 'express';
 
-let data = [
-  { title: 'FP in JavaScript', category: 'FP'},
-  { title: 'RxJS in Action', category: 'FRP'},
-  { title: 'Speaking JavaScript', category: 'JS'}
-]
+const data = [
+  { title: 'FP in JavaScript', category: 'FP' },
+  { title: 'RxJS in Action', category: 'FRP' },
+  { title: 'Speaking JavaScript', category: 'JS' },
+];
 
-let typeDefs = gql`
+const typeDefs = gql`
   type Query {
     books(category: BookCategory!): [Book]
   }
@@ -22,21 +22,20 @@ let typeDefs = gql`
     FRP
     JS
   }
-`
-let books = (_, { category }) => data.filter(x => x.category === category)
+`;
+const books = (_, { category }) => data.filter((x) => x.category === category);
 
-let resolvers = {
+const resolvers = {
   Query: {
-    books
-  }
-}
+    books,
+  },
+};
 
-let app = express()
+const app = express();
 
-let apolloServer = new ApolloServer({ typeDefs, resolvers })
+const apolloServer = new ApolloServer({ typeDefs, resolvers });
 
-apolloServer.applyMiddleware({ app })
+apolloServer.applyMiddleware({ app });
 
 app.listen({ port: 4000 },
-  () => console.log(`GraphQL Server ready at http://localhost:4000${ apolloServer.graphqlPath }`)
-)
+  () => console.log(`GraphQL Server ready at http://localhost:4000${apolloServer.graphqlPath}`));
