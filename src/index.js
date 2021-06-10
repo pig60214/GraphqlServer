@@ -1,6 +1,6 @@
-import { ApolloServer } from 'apollo-server-express'
-import express from 'express'
-import { typeDefs } from './schema/index.js'
+const { ApolloServer } = require('apollo-server-express');
+const express = require('express');
+const typeDefs = require('./schema')
 
 const data = [
   { title: 'FP in JavaScript', category: 'FP' },
