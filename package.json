@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon -e js,graphql,json src/index.js",
     "prod": "cross-env NODE_ENV=production node src/index.js",
@@ -22,6 +21,8 @@
   },
   "homepage": "https://github.com/pig60214/GraphqlServer#readme",
   "dependencies": {
+    "@graphql-tools/load-files": "^6.3.2",
+    "@graphql-tools/merge": "^6.2.14",
     "apollo-server-express": "^2.25.0",
     "express": "^4.17.1",
     "graphql": "^15.5.0",
