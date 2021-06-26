@@ -15,6 +15,15 @@ function getPosts(postsQueryInput) {
       })
 }
 
+function addPost(addPostInput){
+    var { title } = addPostInput;
+    var id = `P${posts.length}`;
+    var post = { id: id, title: title, from: '2021/06/05', to: '2021/06/07' }
+    posts.push(post);
+    return post;
+}
+
 module.exports = {
-    getPosts
+    getPosts,
+    addPost
 }

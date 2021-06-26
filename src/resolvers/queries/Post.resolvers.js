@@ -1,4 +1,4 @@
-const { getPosts } = require('../../repositories/Post')
+const { getPosts, addPost } = require('../../repositories/Post')
 
 module.exports = {
   Query: {
@@ -6,4 +6,10 @@ module.exports = {
       return getPosts(postsQueryInput);
     },
   },
+
+  Mutation: {
+    addPost: (_, { addPostInput }) => {
+      return addPost(addPostInput);
+    },
+  }
 };
