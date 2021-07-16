@@ -6,6 +6,7 @@ type Post {
   location: String
   with: [String!]
   tag: [String!]
+  photos: [Photo!]
   content: String
   processStatus: ProcessStatus!
   isTemplate: Boolean

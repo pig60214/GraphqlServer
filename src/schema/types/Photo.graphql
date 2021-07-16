@@ -1,0 +1,4 @@
+type Photo {
+  path: String
+  caption: String
+}
