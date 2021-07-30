@@ -1,0 +1,4 @@
+input PostsQueryInput {
+    from: String
+    to: String
+}

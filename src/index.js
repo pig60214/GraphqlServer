@@ -4,6 +4,7 @@ const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
 
 const app = express();
+app.use(express.json({limit : '2100000kb'}));
 
 const apolloServer = new ApolloServer({ typeDefs, resolvers });
 

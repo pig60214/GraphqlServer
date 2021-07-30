@@ -1,0 +1,4 @@
+input AddPostInput {
+    title: String!
+    images: [String!]
+}
