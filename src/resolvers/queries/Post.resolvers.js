@@ -2,8 +2,8 @@ const { getPosts, addPost } = require('../../repositories/Post')
 
 module.exports = {
   Query: {
-    posts: (_, { postsQueryInput }) => {
-      return getPosts(postsQueryInput);
+    posts: async (_, { postsQueryInput }) => {
+      return await getPosts(postsQueryInput);
     },
   },
 

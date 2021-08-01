@@ -8,7 +8,7 @@ type Post {
   tag: [String!]
   photos: [Photo!]
   content: String
-  processStatus: ProcessStatus!
+  processStatus: ProcessStatus
   isTemplate: Boolean
   createdOn: String
   modifiedOn: String
