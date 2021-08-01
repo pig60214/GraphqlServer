@@ -30,7 +30,7 @@ async function getPosts(postsQueryInput) {
     }
 }
 
-function addPost(addPostInput){
+async function addPost(addPostInput){
     var { title, images } = addPostInput;
     const config = {
       url: 'https://api.imgur.com/3/image',
@@ -53,10 +53,26 @@ function addPost(addPostInput){
         .catch(e => console.log(e));
     });
 
-    var id = `P${posts.length}`;
-    var post = { id: id, title: title, from: '2021/06/05', to: '2021/06/07' }
-    posts.push(post);
-    return post;
+    await poolConnect; // ensures that the pool has been created
+    try {
+        const result = await pool.request()
+            .input('title', sql.NVarChar(500), title)
+            .input('fromDate', sql.DateTime, '2021/06/05')
+            .input('toDate', sql.DateTime, '2021/06/07')
+            .execute('AddPost');
+        const posts = result.recordset.map(post => {
+            return {
+                id: post.PostId,
+                title: post.Title,
+                from: new Date(post.FromDate).toISOString(),
+                to: new Date(post.ToDate).toISOString(),
+            }
+        });
+        return posts[0];
+    } catch (err) {
+        console.error('SQL error', err);
+        return null;
+    }
 }
 
 module.exports = {

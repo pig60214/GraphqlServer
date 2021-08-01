@@ -8,8 +8,8 @@ module.exports = {
   },
 
   Mutation: {
-    addPost: (_, { addPostInput }) => {
-      return addPost(addPostInput);
+    addPost: async (_, { addPostInput }) => {
+      return await addPost(addPostInput);
     },
   }
 };
