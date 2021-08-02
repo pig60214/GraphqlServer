@@ -1,4 +1,3 @@
-const axios = require('axios');
 const { pool, poolConnect } = require('./connection');
 const sql=require('mssql');
 
@@ -31,27 +30,7 @@ async function getPosts(postsQueryInput) {
 }
 
 async function addPost(addPostInput){
-    var { title, images, from, to } = addPostInput;
-    const config = {
-      url: 'https://api.imgur.com/3/image',
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer beaf5d7bf18bed387f377c2d0668a9a88b4cd10e',
-      },
-    };
-
-    images.forEach(image => {
-      config.data = {
-        image,
-        title: title,
-        album: 'uDUHmuu',
-      };
-
-      axios(config)
-        .then(res => console.log(res))
-        .catch(e => console.log(e));
-    });
+    const { title, from, to } = addPostInput;
 
     await poolConnect; // ensures that the pool has been created
     try {
