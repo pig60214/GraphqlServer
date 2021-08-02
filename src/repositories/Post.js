@@ -31,7 +31,7 @@ async function getPosts(postsQueryInput) {
 }
 
 async function addPost(addPostInput){
-    var { title, images } = addPostInput;
+    var { title, images, from, to } = addPostInput;
     const config = {
       url: 'https://api.imgur.com/3/image',
       method: 'post',
@@ -57,8 +57,8 @@ async function addPost(addPostInput){
     try {
         const result = await pool.request()
             .input('title', sql.NVarChar(500), title)
-            .input('fromDate', sql.DateTime, '2021/06/05')
-            .input('toDate', sql.DateTime, '2021/06/07')
+            .input('fromDate', sql.DateTime, from)
+            .input('toDate', sql.DateTime, to)
             .execute('AddPost');
         const posts = result.recordset.map(post => {
             return {
