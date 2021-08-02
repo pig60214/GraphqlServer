@@ -1,6 +1,11 @@
 input AddPostInput {
-    title: String!
-    images: [String!]
-    from: String
-    to: String
+  title: String!
+  images: [Base64FileCaptionPair!]
+  from: String
+  to: String
+}
+
+input Base64FileCaptionPair {
+  base64File: String!
+  caption: String
 }

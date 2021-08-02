@@ -13,15 +13,17 @@ function addPostImage(postId, addPostInput) {
   };
 
   images.forEach(image => {
+    const { base64File, caption } = image;
     config.data = {
-      image,
+      image: base64File,
       title,
+      description: caption,
       album: 'uDUHmuu',
     };
 
     axios(config)
       .then(res => {
-        imageRepo.addPostImage(postId, res.data.data.link, res.data.data.deletehash);
+        imageRepo.addPostImage(postId, caption, res.data.data.link, res.data.data.deletehash);
       })
       .catch(e => console.log(e));
   });
