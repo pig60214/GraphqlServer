@@ -3,6 +3,7 @@ input AddPostInput {
   photos: [Base64FileCaptionPair!]
   from: String
   to: String
+  color: String
 }
 
 input Base64FileCaptionPair {

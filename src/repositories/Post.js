@@ -10,6 +10,7 @@ function toPostGraphqlType(post) {
         title: post.Title,
         from: fromDate.toISOString().replace('Z', ''),
         to: toDate.toISOString().replace('Z', ''),
+        color: post.Color
     }
 }
 
@@ -41,7 +42,7 @@ async function getPosts(postsQueryInput) {
 }
 
 async function addPost(addPostInput){
-    const { title, from, to } = addPostInput;
+    const { title, from, to, color } = addPostInput;
 
     await poolConnect; // ensures that the pool has been created
     try {
@@ -49,6 +50,7 @@ async function addPost(addPostInput){
             .input('title', sql.NVarChar(500), title)
             .input('fromDate', sql.DateTime, from)
             .input('toDate', sql.DateTime, to)
+            .input('color', sql.NVarChar(30), color)
             .execute('AddPost');
         const posts = result.recordset.map(post => toPostGraphqlType(post));
         return posts[0];
