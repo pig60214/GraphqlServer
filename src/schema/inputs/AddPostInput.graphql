@@ -1,6 +1,6 @@
 input AddPostInput {
   title: String!
-  images: [Base64FileCaptionPair!]
+  photos: [Base64FileCaptionPair!]
   from: String
   to: String
 }

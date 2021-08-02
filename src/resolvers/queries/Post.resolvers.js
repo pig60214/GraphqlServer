@@ -1,5 +1,5 @@
 const { getPosts, addPost } = require('../../repositories/Post');
-const { addPostImage } = require('../../services/imageService');
+const { addPostPhoto } = require('../../services/photoService');
 
 module.exports = {
   Query: {
@@ -11,7 +11,7 @@ module.exports = {
   Mutation: {
     addPost: async (_, { addPostInput }) => {
       const newPost = await addPost(addPostInput);
-      addPostImage(newPost.id, addPostInput);
+      addPostPhoto(newPost.id, addPostInput);
 
       return newPost;
     },

@@ -1,8 +1,8 @@
 const axios = require('axios');
-const imageRepo = require('../repositories/image');
+const photoRepo = require('../repositories/photo');
 
-function addPostImage(postId, addPostInput) {
-  const { title, images } = addPostInput;
+function addPostPhoto(postId, addPostInput) {
+  const { title, photos } = addPostInput;
   const config = {
     url: 'https://api.imgur.com/3/image',
     method: 'post',
@@ -12,8 +12,8 @@ function addPostImage(postId, addPostInput) {
     },
   };
 
-  images.forEach(image => {
-    const { base64File, caption } = image;
+  photos.forEach(photo => {
+    const { base64File, caption } = photo;
     config.data = {
       image: base64File,
       title,
@@ -23,12 +23,12 @@ function addPostImage(postId, addPostInput) {
 
     axios(config)
       .then(res => {
-        imageRepo.addPostImage(postId, caption, res.data.data.link, res.data.data.deletehash);
+        photoRepo.addPostPhoto(postId, caption, res.data.data.link, res.data.data.deletehash);
       })
       .catch(e => console.log(e));
   });
 }
 
 module.exports = {
-  addPostImage
+  addPostPhoto
 }
