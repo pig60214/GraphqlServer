@@ -16,6 +16,7 @@ function toPostGraphqlType(post) {
 
 function toPhotoGraphqlType(photo) {
   return {
+    id: photo.PhotoId,
     path: photo.ImgurLink,
     caption: photo.Caption,
   }
