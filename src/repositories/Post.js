@@ -61,7 +61,29 @@ async function addPost(addPostInput){
     }
 }
 
+async function updatePostAndDeletePhotos(updatePostInput){
+  const { id, title, from, to, color, deletePhotoIds } = updatePostInput;
+  const deletePhotoIdsStr = deletePhotoIds ? deletePhotoIds.join(',') : undefined;
+  await poolConnect; // ensures that the pool has been created
+  try {
+    const result = await pool.request()
+      .input('postId', sql.Int, id)
+      .input('title', sql.NVarChar(500), title)
+      .input('fromDate', sql.Date, from)
+      .input('toDate', sql.Date, to)
+      .input('color', sql.NVarChar(30), color)
+      .input('deletePhotoIdsStr', sql.NVarChar(50), deletePhotoIdsStr)
+      .execute('updatePostAndDeletePhotos');
+    const posts = result.recordset.map(post => toPostGraphqlType(post));
+    return posts[0];
+  } catch (err) {
+    console.error('SQL error', err);
+    return null;
+  }
+}
+
 module.exports = {
     getPosts,
-    addPost
+    addPost,
+    updatePostAndDeletePhotos
 }

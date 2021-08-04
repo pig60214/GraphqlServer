@@ -1,8 +1,9 @@
 const axios = require('axios');
 const photoRepo = require('../repositories/photo');
 
-function addPostPhoto(postId, addPostInput) {
-  const { title, photos } = addPostInput;
+function addPostPhoto(postId, title, photos) {
+  if (photos === undefined || photos.length === 0) return;
+
   const config = {
     url: 'https://api.imgur.com/3/image',
     method: 'post',
