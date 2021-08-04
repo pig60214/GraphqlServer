@@ -26,8 +26,8 @@ async function getPosts(postsQueryInput) {
     await poolConnect; // ensures that the pool has been created
     try {
         const result = await pool.request()
-            .input('fromDate', sql.DateTime, from)
-            .input('toDate', sql.DateTime, to)
+            .input('fromDate', sql.Date, from)
+            .input('toDate', sql.Date, to)
             .execute('GetPosts');
         const posts = result.recordset.map(post => toPostGraphqlType(post));
         const photos = result.recordsets[1];
@@ -48,8 +48,8 @@ async function addPost(addPostInput){
     try {
         const result = await pool.request()
             .input('title', sql.NVarChar(500), title)
-            .input('fromDate', sql.DateTime, from)
-            .input('toDate', sql.DateTime, to)
+            .input('fromDate', sql.Date, from)
+            .input('toDate', sql.Date, to)
             .input('color', sql.NVarChar(30), color)
             .execute('AddPost');
         const posts = result.recordset.map(post => toPostGraphqlType(post));
