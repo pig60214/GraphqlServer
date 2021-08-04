@@ -8,8 +8,8 @@ function toPostGraphqlType(post) {
     return {
         id: post.PostId,
         title: post.Title,
-        from: fromDate.toISOString().replace('Z', ''),
-        to: toDate.toISOString().replace('Z', ''),
+        from: fromDate.toISOString().substr(0, 10).replace('-','.'),
+        to: toDate.toISOString().substr(0, 10).replace('-','.'),
         color: post.Color
     }
 }
