@@ -1,4 +1,4 @@
-const { getPosts, addPost, updatePostAndDeletePhotos } = require('../../repositories/Post');
+const { getPosts, addPost, updatePostAndDeletePhotos } = require('../../repositories/post');
 const { addPostPhoto } = require('../../services/photoService');
 
 module.exports = {
