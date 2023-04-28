@@ -1,5 +1,7 @@
 const axios = require('axios');
 const photoRepo = require('../repositories/photo');
+const dotenv = require("dotenv");
+dotenv.config();
 
 function addPostPhoto(postId, title, photos) {
   if (photos === undefined || photos.length === 0) return;
@@ -9,7 +11,7 @@ function addPostPhoto(postId, title, photos) {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer beaf5d7bf18bed387f377c2d0668a9a88b4cd10e',
+      Authorization: `Bearer ${process.env.IMGURACCESSTOKEN}`,
     },
   };
 
@@ -19,7 +21,7 @@ function addPostPhoto(postId, title, photos) {
       image: base64File,
       title,
       description: caption,
-      album: 'uDUHmuu',
+      album: process.env.IMGURALBUMID,
     };
 
     axios(config)
