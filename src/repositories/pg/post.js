@@ -1,7 +1,6 @@
 const { pool } = require('./connection');
 
 function toPostGraphqlType(post) {
-
   return {
       id: post.id,
       title: post.title,
@@ -35,6 +34,34 @@ async function getPosts(postsQueryInput) {
   }
 }
 
+async function addPost(addPostInput){
+  const { title, from, to, color } = addPostInput;
+  try {
+      const result = await pool.query(`SELECT * FROM add_post('${title}','${from}','${to}','${color}')`);
+      const posts = result.rows.map(post => toPostGraphqlType(post));
+      return posts[0];
+  } catch (err) {
+      console.error('SQL error', err);
+      return null;
+  }
+}
+
+async function updatePostAndDeletePhotos(updatePostInput){
+  const { id, title, from, to, color, deletePhotoIds } = updatePostInput;
+  const deletePhotoIdsStr = deletePhotoIds ? deletePhotoIds.join(',') : '';
+  try {
+    const result = await pool.query(`SELECT * FROM update_post_and_delete_photos(${id},'${title}','${from}','${to}','${color}', '${deletePhotoIdsStr}')`);
+    const posts = result.rows.map(post => toPostGraphqlType(post));
+    console.log(posts[0]);
+    return posts[0];
+  } catch (err) {
+    console.error('SQL error', err);
+    return null;
+  }
+}
+
 module.exports = {
   getPosts,
+  addPost,
+  updatePostAndDeletePhotos,
 }
