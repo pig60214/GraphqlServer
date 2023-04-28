@@ -52,7 +52,6 @@ async function updatePostAndDeletePhotos(updatePostInput){
   try {
     const result = await pool.query(`SELECT * FROM update_post_and_delete_photos(${id},'${title}','${from}','${to}','${color}', '${deletePhotoIdsStr}')`);
     const posts = result.rows.map(post => toPostGraphqlType(post));
-    console.log(posts[0]);
     return posts[0];
   } catch (err) {
     console.error('SQL error', err);
