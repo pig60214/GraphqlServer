@@ -1,4 +1,4 @@
-const { getPosts, addPost, updatePostAndDeletePhotos } = require('./mssql/post');
+const { getPosts, addPost, updatePostAndDeletePhotos } = require('./pg/post');
 
 module.exports = {
   getPosts,

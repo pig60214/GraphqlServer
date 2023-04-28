@@ -1,4 +1,4 @@
-const { addPostPhoto } = require('./mssql/photo');
+const { addPostPhoto } = require('./pg/photo');
 
 module.exports = {
   addPostPhoto,
