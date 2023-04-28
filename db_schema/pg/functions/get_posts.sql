@@ -3,12 +3,10 @@ DECLARE
   posts post_with_photo;
   BEGIN
 
-    SELECT 
-      json_agg(post),
-      json_agg(photo)
-    INTO posts
-    FROM post INNER JOIN photo ON post.id = photo.post_id
-    WHERE post.from_date >= _from_date AND post.from_date <= _to_date;
+    SELECT json_agg(post) INTO posts.posts FROM post WHERE post.from_date >= _from_date AND post.from_date <= _to_date;
+
+    SELECT json_agg(photo) INTO posts.photos FROM photo
+    WHERE post_id in (SELECT id FROM post WHERE post.from_date >= _from_date AND post.from_date <= _to_date);
 
     RETURN posts;
   END;
