@@ -5,8 +5,8 @@ function toPostGraphqlType(post) {
   return {
       id: post.id,
       title: post.title,
-      from: post.fromdate,
-      to: post.todate,
+      from: post.from_date,
+      to: post.to_date,
       color: post.color
   }
 }
@@ -14,7 +14,7 @@ function toPostGraphqlType(post) {
 function toPhotoGraphqlType(photo) {
   return {
     id: photo.id,
-    path: photo.imgurlink,
+    path: photo.imgur_link,
     caption: photo.caption,
   }
 }
@@ -22,7 +22,7 @@ function toPhotoGraphqlType(photo) {
 async function getPosts(postsQueryInput) {
   const { from, to } = postsQueryInput;
   try {
-    const result = await pool.query(`SELECT * FROM GetPosts('${from}','${to}')`);
+    const result = await pool.query(`SELECT * FROM get_posts('${from}','${to}')`);
       const posts = result.rows[0].posts.map(post => toPostGraphqlType(post));
       const photos = result.rows[0].photos;
       posts.forEach(post => {
