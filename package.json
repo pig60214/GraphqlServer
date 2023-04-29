@@ -21,13 +21,13 @@
   },
   "homepage": "https://github.com/pig60214/GraphqlServer#readme",
   "dependencies": {
+    "@apollo/server": "^4.7.0",
     "@graphql-tools/load-files": "^6.3.2",
     "@graphql-tools/merge": "^6.2.14",
-    "apollo-server-express": "^2.25.0",
     "axios": "^0.21.1",
     "dotenv": "^16.0.3",
     "express": "^4.17.1",
-    "graphql": "^15.5.0",
+    "graphql": "^16.6.0",
     "graphql-tools": "^7.0.5",
     "mssql": "^7.2.0",
     "pg": "^8.10.0"
