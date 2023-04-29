@@ -1,5 +1,6 @@
 const { mergeResolvers } = require('@graphql-tools/merge');
-const { loadFilesSync } = require('@graphql-tools/load-files');
 
-const resolversArray = loadFilesSync('./**/*.resolvers.js');
+const post = require('./queries/post.resolvers')
+
+const resolversArray = [post];
 module.exports = mergeResolvers(resolversArray);
