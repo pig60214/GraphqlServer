@@ -10,5 +10,9 @@ const apolloServer = new ApolloServer({ typeDefs, resolvers });
 
 apolloServer.applyMiddleware({ app });
 
-app.listen({ port: 4000 },
-  () => console.log(`GraphQL Server ready at http://localhost:4000${apolloServer.graphqlPath}`));  // eslint-disable-line
+if(process.env.NODE_ENV === 'development') {
+  app.listen({ port: 4000 },
+    () => console.log(`GraphQL Server ready at http://localhost:4000${apolloServer.graphqlPath}`));  // eslint-disable-line
+} else {
+  app.listen(() => console.log(`GraphQL Server ready at http://{{domainName}}${apolloServer.graphqlPath}`));  // eslint-disable-line
+}
