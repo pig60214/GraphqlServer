@@ -4,8 +4,8 @@ function toPostGraphqlType(post) {
   return {
       id: post.id,
       title: post.title,
-      from: post.from_date,
-      to: post.to_date,
+      from: post.from_date.replaceAll('-', '/'),
+      to: post.to_date.replaceAll('-', '/'),
       color: post.color
   }
 }
