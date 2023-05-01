@@ -8,7 +8,15 @@ const getHandler = (event, context) => {
       resolvers,
       debug: true,
   });
-  const graphqlHandler = server.createHandler();
+
+  const graphqlHandler = server.createHandler({
+    expressGetMiddlewareOptions: {
+      bodyParserConfig: {
+        limit:"10mb"
+      }
+    }
+  });
+
   if (!event.requestContext) {
       event.requestContext = context;
   }

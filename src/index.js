@@ -11,7 +11,11 @@ const server = new ApolloServer({
 async function start() {
   const url = await startStandaloneServer(server, {
     listen: { port: 4000 },
+    bodyParserConfig: {
+      limit:"10mb"
+    }
   });
+
   console.log(`🚀  Server ready at: ${url.url}`);
 }
 
