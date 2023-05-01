@@ -5,7 +5,7 @@ CREATE OR REPLACE FUNCTION update_post_and_delete_photos(
   _to_date DATE,
   _color VARCHAR(30),
   _delete_photo_ids VARCHAR(400)
-) RETURNS SETOF post AS $$
+) RETURNS table (data json) AS $$
   BEGIN
 
     UPDATE post
@@ -17,7 +17,7 @@ CREATE OR REPLACE FUNCTION update_post_and_delete_photos(
     );
 
 
-    RETURN QUERY SELECT * FROM post WHERE post.id = _id;
+    RETURN QUERY SELECT row_to_json(post) FROM post WHERE post.id = _id;
 
   END;
 $$ LANGUAGE plpgsql;

@@ -38,8 +38,8 @@ async function addPost(addPostInput){
   const { title, from, to, color } = addPostInput;
   try {
       const result = await pool.query(`SELECT * FROM add_post('${title}','${from}','${to}','${color}')`);
-      const posts = result.rows.map(post => toPostGraphqlType(post));
-      return posts[0];
+      const post = toPostGraphqlType(result.rows[0].data);
+      return post;
   } catch (err) {
       console.error('SQL error', err);
       return null;
@@ -51,8 +51,8 @@ async function updatePostAndDeletePhotos(updatePostInput){
   const deletePhotoIdsStr = deletePhotoIds ? deletePhotoIds.join(',') : '';
   try {
     const result = await pool.query(`SELECT * FROM update_post_and_delete_photos(${id},'${title}','${from}','${to}','${color}', '${deletePhotoIdsStr}')`);
-    const posts = result.rows.map(post => toPostGraphqlType(post));
-    return posts[0];
+    const post = toPostGraphqlType(result.rows[0].data);
+    return post;
   } catch (err) {
     console.error('SQL error', err);
     return null;
