@@ -24,9 +24,11 @@ async function getPosts(postsQueryInput) {
     const result = await pool.query(`SELECT * FROM get_posts('${from}','${to}')`);
       const posts = result.rows[0].posts.map(post => toPostGraphqlType(post));
       const photos = result.rows[0].photos;
-      posts.forEach(post => {
-        post.photos = photos.filter(photo => photo.post_id === post.id).map(photo => toPhotoGraphqlType(photo));
-      });
+      if (photos) {
+        posts.forEach(post => {
+          post.photos = photos.filter(photo => photo.post_id === post.id).map(photo => toPhotoGraphqlType(photo));
+        });
+      }
       return posts;
   } catch (err) {
       console.error('SQL error', err);
