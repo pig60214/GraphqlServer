@@ -22,9 +22,9 @@ async function getPosts(postsQueryInput) {
   const { from, to } = postsQueryInput;
   try {
     const result = await pool.query(`SELECT * FROM get_posts('${from}','${to}')`);
-      const posts = result.rows[0].posts.map(post => toPostGraphqlType(post));
-      const photos = result.rows[0].photos;
-      if (photos) {
+      const posts = result.rows[0].posts ? result.rows[0].posts.map(post => toPostGraphqlType(post)) : [];
+      const photos = result.rows[0].photos ? result.rows[0].photos : [];
+      if (photos.length > 0) {
         posts.forEach(post => {
           post.photos = photos.filter(photo => photo.post_id === post.id).map(photo => toPhotoGraphqlType(photo));
         });
