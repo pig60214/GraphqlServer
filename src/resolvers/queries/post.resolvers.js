@@ -13,7 +13,7 @@ module.exports = {
       const newPost = await addPost(addPostInput);
 
       const { title, photos } = addPostInput;
-      addPostPhoto(newPost.id, title, photos);
+      await addPostPhoto(newPost.id, title, photos);
 
       return newPost;
     },
@@ -21,7 +21,7 @@ module.exports = {
     updatePost: async (_, { updatePostInput }) => {
       const post = await updatePostAndDeletePhotos(updatePostInput);
       const { id, title, addPhotos } = updatePostInput;
-      addPostPhoto(id, title, addPhotos);
+      await addPostPhoto(id, title, addPhotos);
 
       return post;
     },

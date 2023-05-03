@@ -3,7 +3,7 @@ const photoRepo = require('../repositories/photo');
 const dotenv = require("dotenv");
 dotenv.config();
 
-function addPostPhoto(postId, title, photos) {
+async function addPostPhoto(postId, title, photos) {
   if (photos === undefined || photos.length === 0) return;
 
   const config = {
@@ -15,7 +15,7 @@ function addPostPhoto(postId, title, photos) {
     },
   };
 
-  photos.forEach(photo => {
+  for(const photo of photos) {
     const { base64File, caption } = photo;
     config.data = {
       image: base64File,
@@ -24,12 +24,12 @@ function addPostPhoto(postId, title, photos) {
       album: process.env.IMGURALBUMID,
     };
 
-    axios(config)
-      .then(res => {
-        photoRepo.addPostPhoto(postId, caption, res.data.data.link, res.data.data.deletehash);
-      })
-      .catch(e => console.log(e));
-  });
+    await axios(config)
+    .then(async (res) => {
+      await photoRepo.addPostPhoto(postId, caption, res.data.data.link, res.data.data.deletehash);
+    })
+    .catch(e => console.log(e));
+  }
 }
 
 module.exports = {
